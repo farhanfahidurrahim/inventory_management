@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SupplierController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +21,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['auth'])->group(function(){
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-});
+// Route::middleware(['auth'])->group(function(){
+//     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// });
 
 //Backend
-Route::get('/test', [\App\Http\Controllers\HomeController::class, 'test'])->name('test');
+Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function(){
+    Route::get('/', [\App\Http\Controllers\HomeController::class, 'adminIndex'])->name('home');
+
+    //Supplier
+    Route::resource('/supplier', SupplierController::class);
+});

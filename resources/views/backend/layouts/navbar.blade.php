@@ -1,14 +1,12 @@
 <nav class="navbar navbar-expand-lg main-navbar">
     <form class="form-inline mr-auto">
         <ul class="navbar-nav mr-3">
-            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i
-                        class="fas fa-bars"></i></a></li>
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
             <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i
                         class="fas fa-search"></i></a></li>
         </ul>
         <div class="search-element">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search"
-                data-width="250">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">
             <button class="btn" type="submit"><i class="fas fa-search"></i></button>
             <div class="search-backdrop"></div>
             <div class="search-result">
@@ -85,8 +83,7 @@
                 <div class="dropdown-list-content dropdown-list-message">
                     <a href="#" class="dropdown-item dropdown-item-unread">
                         <div class="dropdown-item-avatar">
-                            <img alt="image" src="assets/img/avatar/avatar-1.png"
-                                class="rounded-circle">
+                            <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle">
                             <div class="is-online"></div>
                         </div>
                         <div class="dropdown-item-desc">
@@ -97,8 +94,7 @@
                     </a>
                     <a href="#" class="dropdown-item dropdown-item-unread">
                         <div class="dropdown-item-avatar">
-                            <img alt="image" src="assets/img/avatar/avatar-2.png"
-                                class="rounded-circle">
+                            <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle">
                         </div>
                         <div class="dropdown-item-desc">
                             <b>Dedik Sugiharto</b>
@@ -108,8 +104,7 @@
                     </a>
                     <a href="#" class="dropdown-item dropdown-item-unread">
                         <div class="dropdown-item-avatar">
-                            <img alt="image" src="assets/img/avatar/avatar-3.png"
-                                class="rounded-circle">
+                            <img alt="image" src="assets/img/avatar/avatar-3.png" class="rounded-circle">
                             <div class="is-online"></div>
                         </div>
                         <div class="dropdown-item-desc">
@@ -120,8 +115,7 @@
                     </a>
                     <a href="#" class="dropdown-item">
                         <div class="dropdown-item-avatar">
-                            <img alt="image" src="assets/img/avatar/avatar-4.png"
-                                class="rounded-circle">
+                            <img alt="image" src="assets/img/avatar/avatar-4.png" class="rounded-circle">
                         </div>
                         <div class="dropdown-item-desc">
                             <b>Ardian Rahardiansyah</b>
@@ -131,8 +125,7 @@
                     </a>
                     <a href="#" class="dropdown-item">
                         <div class="dropdown-item-avatar">
-                            <img alt="image" src="assets/img/avatar/avatar-5.png"
-                                class="rounded-circle">
+                            <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle">
                         </div>
                         <div class="dropdown-item-desc">
                             <b>Alfa Zulkarnain</b>
@@ -223,10 +216,25 @@
                     <i class="fas fa-cog"></i> Settings
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item has-icon text-danger">
+                <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
         </li>
     </ul>
 </nav>
+
+
+{{-- <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+    <a class="dropdown-item" href="{{ route('logout') }}"
+        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        {{ __('Logout') }}
+    </a>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
+</div> --}}
