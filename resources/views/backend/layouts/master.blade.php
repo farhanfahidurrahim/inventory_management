@@ -37,12 +37,14 @@
 
 <body>
     <div id="app">
+
+        @guest
+            @yield('content')
+        @else
         <div class="main-wrapper main-wrapper-1">
             <div class="navbar-bg"></div>
-
             <!-- Navbar Content -->
             @include('backend.layouts.navbar')
-
             <!-- Sidebar Content -->
             @include('backend.layouts.sidebar')
 
@@ -51,6 +53,8 @@
                 @yield('content')
             </div>
         </div>
+        @endguest
+
     </div>
 
     <!-- General JS Scripts -->
