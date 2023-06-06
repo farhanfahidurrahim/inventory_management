@@ -21,13 +21,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::middleware(['auth'])->group(function(){
-//     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// });
+Route::middleware(['auth'])->group(function(){
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
 
 //Backend
 Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function(){
-    Route::get('/', [\App\Http\Controllers\HomeController::class, 'adminIndex'])->name('home');
+    Route::get('/', [\App\Http\Controllers\Admin\AdminController::class, 'adminIndex'])->name('admin');
 
     //Supplier
     Route::resource('/supplier', SupplierController::class);
