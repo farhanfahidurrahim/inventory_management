@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
 
 class SupplierController extends Controller
 {
@@ -14,7 +16,9 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        return view('backend.supplier.index');
+        $page_title='All Suppliers Info';
+        $data=Supplier::all();
+        return view('backend.supplier.index',compact('data','page_title'));
     }
 
     /**
@@ -35,7 +39,27 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return $request->all();
+        $request->validate([
+            'name'=>'required|string',
+            'image'=>'required|image|mimes:jpg,jpeg,png,webp,max:2048',
+            'email'=>'required|unique:suppliers,email',
+            'phone'=>'required|unique:suppliers,phone',
+            'address'=>'required',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $imgName=date('YmdHis').'.'.$request->file('image')->extension();
+            Image::make($request->file('image'))->resize(300,300)->save(public_path('/uploads/supplier/').$imgName);
+            $imgPath="uploads/supplier/$imgName";
+        }
+
+        $data=$request->all();
+        $data['image']=$imgPath;
+        $store=Supplier::create($data);
+        if ($store) {
+            return redirect()->route('supplier.index');
+        }
     }
 
     /**
@@ -57,7 +81,10 @@ class SupplierController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data=Supplier::FindOrFail($id);
+        if ($data) {
+            return view('backend.supplier.edit',compact('data'));
+        }
     }
 
     /**
@@ -69,7 +96,39 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //return $request->all();
+        $findid=Supplier::findOrFail($id);
+        $request->validate([
+            'name'=>'required|string',
+            'email' => 'required|email|unique:suppliers,email,'.$id,
+            'phone'=>'required|unique:suppliers,phone,'.$id,
+            'address'=>'required',
+        ]);
+
+        $imgPath = $findid->image; // Default image path
+
+        if ($request->hasFile('image')) {
+            $path=public_path($findid->image);
+            if (file_exists($path)) {
+                unlink($path);
+            }
+
+            $imgName=date('YmdHis').'.'.$request->file('image')->extension();
+            Image::make($request->file('image'))->resize(300,300)->save(public_path('/uploads/supplier/').$imgName);
+            $imgPath="uploads/supplier/$imgName";
+        }
+
+        $update=$findid->update([
+            'name'=>$request->name,
+            'image'=>$imgPath,
+            'email' =>$request->email,
+            'phone'=>$request->phone,
+            'address'=>$request->address,
+        ]);
+
+        if ($update) {
+            return redirect()->route('supplier.index');
+        }
     }
 
     /**
@@ -80,6 +139,12 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //return $id;
+        $findid=Supplier::findOrFail($id);
+        @unlink(public_path('/').$findid->image);
+        $findid->delete();
+
+        return redirect()->back();
+
     }
 }

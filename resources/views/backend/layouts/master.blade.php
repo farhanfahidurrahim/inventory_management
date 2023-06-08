@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Ecommerce Dashboard &mdash; Stisla</title>
+    <title>Ecommerce :: @yield('title')</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('backend/assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/modules/jqvmap/dist/jqvmap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/modules/summernote/summernote-bs4.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('backend/assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/assets/plugins/dropify/css/dropify.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}">
@@ -41,18 +42,18 @@
         @guest
             @yield('content')
         @else
-        <div class="main-wrapper main-wrapper-1">
-            <div class="navbar-bg"></div>
-            <!-- Navbar Content -->
-            @include('backend.layouts.navbar')
-            <!-- Sidebar Content -->
-            @include('backend.layouts.sidebar')
+            <div class="main-wrapper main-wrapper-1">
+                <div class="navbar-bg"></div>
+                <!-- Navbar Content -->
+                @include('backend.layouts.navbar')
+                <!-- Sidebar Content -->
+                @include('backend.layouts.sidebar')
 
-            <!-- Main Content -->
-            <div class="main-content">
-                @yield('content')
+                <!-- Main Content -->
+                <div class="main-content">
+                    @yield('content')
+                </div>
             </div>
-        </div>
         @endguest
 
     </div>
@@ -72,6 +73,13 @@
     <script src="{{ asset('backend/assets/modules/owlcarousel2/dist/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('backend/assets/modules/summernote/summernote-bs4.js') }}"></script>
     <script src="{{ asset('backend/assets/modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/dropify/js/dropify.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+
+    {{-- <script>
+        let table = new DataTable('#myTable');
+    </script> --}}
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('backend/assets/js/page/index.js') }}"></script>
@@ -79,6 +87,9 @@
     <!-- Template JS File -->
     <script src="{{ asset('backend/assets/js/scripts.js') }}"></script>
     <script src="{{ asset('backend/assets/js/custom.js') }}"></script>
+
+    @yield('scripts')
+
 </body>
 
 </html>
