@@ -18,19 +18,16 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    {{-- <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus> --}}
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" tabindex="1" required autocomplete="email" autofocus>
-
                                     @error('email')
                                         <span class="invalid-feedback"
                                             role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-
-                                    <div class="invalid-feedback">
-                                        Please fill in your email
-                                    </div>
+                                    {{-- <div class="invalid-feedback">
+                                        Please check your email
+                                    </div> --}}
                                 </div>
 
                                 <div class="form-group">
@@ -42,18 +39,16 @@
                                             </a>
                                         </div>
                                     </div>
-                                    {{-- <input id="password" type="password" class="form-control" name="password" tabindex="2" required> --}}
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" tabindex="2" required autocomplete="current-password">
-
                                     @error('password')
                                         <span class="invalid-feedback"
                                             role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    <div class="invalid-feedback">
-                                        please fill in your password
-                                    </div>
+                                    {{-- <div class="invalid-feedback">
+                                        please check your password
+                                    </div> --}}
                                 </div>
 
                                 <div class="form-group">
@@ -70,7 +65,7 @@
                                     </button>
                                 </div>
                             </form>
-                            <div class="text-center mt-4 mb-3">
+                            {{-- <div class="text-center mt-4 mb-3">
                                 <div class="text-job text-muted">Login With Social</div>
                             </div>
                             <div class="row sm-gutters">
@@ -84,16 +79,16 @@
                                         <span class="fab fa-twitter"></span> Twitter
                                     </a>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
-                    <div class="mt-5 text-muted text-center">
+                    {{-- <div class="mt-5 text-muted text-center">
                         Don't have an account? <a href="auth-register.html">Create One</a>
-                    </div>
-                    <div class="simple-footer">
+                    </div> --}}
+                    {{-- <div class="simple-footer">
                         Copyright &copy; Stisla 2018
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect()->route('admin');
+        return redirect()->route('admin')->with('success',"Login Successfully!");
     }
 
 }
