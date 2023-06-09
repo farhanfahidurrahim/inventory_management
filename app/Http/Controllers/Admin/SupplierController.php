@@ -129,6 +129,9 @@ class SupplierController extends Controller
         if ($update) {
             return redirect()->route('supplier.index')->with('success',"Updated!");
         }
+        else{
+            return redirect()->back()->with('warning',"Try Again!");
+        }
     }
 
     /**
