@@ -58,7 +58,7 @@ class SupplierController extends Controller
         $data['image']=$imgPath;
         $store=Supplier::create($data);
         if ($store) {
-            return redirect()->route('supplier.index');
+            return redirect()->route('supplier.index')->with('success',"Created!");
         }
     }
 
@@ -127,7 +127,7 @@ class SupplierController extends Controller
         ]);
 
         if ($update) {
-            return redirect()->route('supplier.index');
+            return redirect()->route('supplier.index')->with('success',"Updated!");
         }
     }
 
@@ -144,7 +144,7 @@ class SupplierController extends Controller
         @unlink(public_path('/').$findid->image);
         $findid->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('error',"Deleted!");
 
     }
 }
