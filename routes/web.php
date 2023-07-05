@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +38,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function(){
     Route::resource('/customer', CustomerController::class)->only(['index','create','edit']);
     //Category
     Route::resource('/category', CategoryController::class);
+    //Product
+    Route::resource('/product', ProductController::class);
 });

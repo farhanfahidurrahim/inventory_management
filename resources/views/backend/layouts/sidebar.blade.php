@@ -34,6 +34,9 @@
                     <li class="{{ request()->routeIs('category.create') ? 'active':'' }}"><a class="nav-link" href="{{ route('category.create') }}">Add Category</a></li>
                 </ul>
             </li>
+            <li class="{{ request()->routeIs('product.index') ? 'active':'' }}"><a class="nav-link" href="{{ route('product.index') }}"><i class="fas fa-pencil-ruler"></i>
+                <span>Product</span></a>
+            </li>
             <li class="menu-header">Stisla</li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i>
@@ -144,7 +147,8 @@
                 </ul>
             </li>
             <li><a class="nav-link" href="credits.html"><i class="fas fa-pencil-ruler"></i>
-                    <span>Credits</span></a></li>
+                <span>Credits</span></a>
+            </li>
         </ul>
 
     </aside>
