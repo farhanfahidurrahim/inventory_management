@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title','Index | Supplier')
+@section('title','Index | Category')
 @section('content')
 
     <div class="section-body">
@@ -13,24 +13,16 @@
                         <table id="myTable" class="table table-striped">
                             <thead>
                                 <th>Sl No.</th>
-                                <th>Thumbnail</th>
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Address</th>
                                 <th>Action</th>
                             </thead>
                             <tbody>
                                 @foreach ($data as $row)
                                     <tr>
                                         <td>{{ $loop->iteration++ }}</td>
-                                        <td><img src="{{ asset($row->image) }}" style="width: 75px; height: 50px" alt="supplier img"></td>
                                         <td>{{ $row->name }}</td>
-                                        <td>{{ $row->email }}</td>
-                                        <td>{{ $row->phone }}</td>
-                                        <td>{{ $row->address }}</td>
                                         <td>
-                                            <a class="btn btn-primary" href="{{ route('supplier.edit',$row->id) }}">Edit</a> |
+                                            <a class="btn btn-primary" href="{{ route('category.edit',$row->id) }}">Edit</a> |
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$row->id}}">Delete</button>
                                         </td>
                                     </tr>
@@ -50,7 +42,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-                                                    <form action="{{ route('supplier.destroy',$row->id) }}" method="POST">
+                                                    <form action="{{ route('category.destroy',$row->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Yes</button>

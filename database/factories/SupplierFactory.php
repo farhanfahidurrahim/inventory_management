@@ -22,6 +22,7 @@ class SupplierFactory extends Factory
             'email'=>$this->faker->unique()->safeEmail,
             'phone'=>$this->faker->phoneNumber,
             'address'=>$this->faker->address,
+            'status' =>$this->faker->randomElement(['1','2']),
         ];
     }
 }

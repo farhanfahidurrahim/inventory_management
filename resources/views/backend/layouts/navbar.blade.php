@@ -14,13 +14,6 @@
                     Histories
                 </div>
                 <div class="search-item">
-                    <a href="#">How to hack NASA using CSS</a>
-                    <a href="#" class="search-close"><i class="fas fa-times"></i></a>
-                </div>
-                <div class="search-header">
-                    Result
-                </div>
-                <div class="search-item">
                     <a href="#">
                         <img class="mr-3 rounded" width="30" src="assets/img/products/product-3-50.png"
                             alt="product">

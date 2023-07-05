@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title','Add Supplier')
+@section('title','Create | Supplier')
 @section('content')
 
     <div class="row">
@@ -11,6 +11,7 @@
 
                 <form action="{{ route('supplier.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="status" value="1">
                     <div class="card-body">
                         <div class="form-group">
                             <label>Name</label>

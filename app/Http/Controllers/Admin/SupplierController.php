@@ -17,7 +17,7 @@ class SupplierController extends Controller
     public function index()
     {
         $page_title='All Suppliers Info';
-        $data=Supplier::all();
+        $data=Supplier::where('status',1)->get();
         return view('backend.supplier.index',compact('data','page_title'));
     }
 
@@ -124,6 +124,7 @@ class SupplierController extends Controller
             'email' =>$request->email,
             'phone'=>$request->phone,
             'address'=>$request->address,
+            'status'=>$request->status,
         ]);
 
         if ($update) {

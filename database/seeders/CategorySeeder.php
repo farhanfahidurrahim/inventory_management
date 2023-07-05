@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Supplier;
+use App\Models\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class SupplierSeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,9 +15,12 @@ class SupplierSeeder extends Seeder
      */
     public function run()
     {
-        Supplier::create([
-            'name'=>
-            ''
-        ]);
+        $categories = ([
+            'name' => 'Phone',
+            'name' => 'Desktop',
+            'name' => 'Laptop',
+            ]);
+
+        //Category::insert($categories);
     }
 }
