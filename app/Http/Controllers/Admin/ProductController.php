@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -27,7 +29,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('backend.product.create');
+        $categories=Category::all();
+        $suppliers=Supplier::all();
+        return view('backend.product.create',compact('categories','suppliers'));
     }
 
     /**
@@ -38,7 +42,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request->all();
     }
 
     /**

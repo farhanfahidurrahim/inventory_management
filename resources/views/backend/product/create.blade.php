@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" name="name" value="{{ old('name') }}" placeholder="name" class="form-control">
+                            <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter Name" class="form-control">
                             @error('name')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -30,46 +30,37 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Email</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <i class="fas fa-envelope"></i>
-                                    </div>
-                                </div>
-                                <input type="email" name="email" value="{{ old('email') }}" placeholder="email" class="form-control">
-                            </div>
-                            @error('email')
+                            <label>Category</label>
+                            <select name="category_id" id="" class="form-control">
+                                <option selected disabled value="">Select Category</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label>Phone</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <i class="fas fa-phone"></i>
-                                    </div>
-                                </div>
-                                <input type="tel" name="phone" value="{{ old('phone') }}" placeholder="phone" class="form-control">
-                            </div>
-                            @error('phone')
+                            <label>Supplier</label>
+                            <select name="supplier_id" id="" class="form-control">
+                                <option selected disabled value="">Select Supplier</option>
+                                @foreach ($suppliers as $supplier)
+                                    <option value="">{{ $supplier->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('supplier_id')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label>Address</label>
+                            <label>Brand</label>
                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <i class="fas fa-home"></i>
-                                    </div>
-                                </div>
-                                <input type="text" name="address" value="{{ old('address') }}" placeholder="address" class="form-control">
+                                <input type="text" name="brand" value="{{ old('brand') }}" placeholder="Enter Brand" class="form-control">
                             </div>
-                            @error('address')
+                            @error('brand')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
