@@ -31,7 +31,7 @@
                                         <td>{{ $row->supplier->name }}</td>
                                         <td>{{ $row->brand }}</td>
                                         <td>
-                                            <a class="btn btn-primary" href="{{ route('supplier.edit',$row->id) }}">Edit</a> |
+                                            <a class="btn btn-primary" href="{{ route('product.edit',$row->id) }}">Edit</a> |
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$row->id}}">Delete</button>
                                         </td>
                                     </tr>
