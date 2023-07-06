@@ -25,7 +25,7 @@
                                 @foreach ($data as $row)
                                     <tr>
                                         <td>{{ $loop->iteration++ }}</td>
-                                        <td><img src="{{ asset($row->image) }}" style="width: 75px; height: 50px" alt="img"></td>
+                                        <td><img src="{{ asset($row->image) }}" style="width: 80px; height: 60px" alt="img"></td>
                                         <td>{{ $row->name }}</td>
                                         <td>{{ $row->category->name }}</td>
                                         <td>{{ $row->supplier->name }}</td>
@@ -51,7 +51,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-                                                    <form action="{{ route('supplier.destroy',$row->id) }}" method="POST">
+                                                    <form action="{{ route('product.destroy',$row->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Yes</button>

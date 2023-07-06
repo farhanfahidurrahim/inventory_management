@@ -145,6 +145,14 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data=Product::findOrFail($id);
+        @unlink(public_path('/').$data->image);
+        $data->delete();
+        if ($data) {
+            return redirect()->route('product.index')->with('success',"Deleted!");
+        }
+        else{
+            return redirect()->back()->with('warning',"Try Again!");
+        }
     }
 }

@@ -73,7 +73,8 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-danger">Update</button>
+                            <a href="{{ route('product.index') }}" class="btn btn-primary">Back</a>
                         </div>
                     </div>
                 </form>
