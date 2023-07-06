@@ -31,10 +31,10 @@
 
                         <div class="form-group">
                             <label>Category</label>
-                            <select name="category_id" id="" class="form-control">
+                            <select name="category_id" class="form-control">
                                 <option selected disabled value="">Select Category</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('category_id')
@@ -47,7 +47,7 @@
                             <select name="supplier_id" id="" class="form-control">
                                 <option selected disabled value="">Select Supplier</option>
                                 @foreach ($suppliers as $supplier)
-                                    <option value="">{{ $supplier->name }}</option>
+                                    <option value="{{ $supplier->id }}" {{ old('supplier_id') == $supplier->id ? 'selected' : '' }}>{{ $supplier->name }}</option>
                                 @endforeach
                             </select>
                             @error('supplier_id')
@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Brand</label>
+                            <label>Brand</label> <span style="color: red">*optional</span>
                             <div class="input-group">
                                 <input type="text" name="brand" value="{{ old('brand') }}" placeholder="Enter Brand" class="form-control">
                             </div>

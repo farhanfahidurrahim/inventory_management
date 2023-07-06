@@ -25,11 +25,11 @@
                                 @foreach ($data as $row)
                                     <tr>
                                         <td>{{ $loop->iteration++ }}</td>
-                                        <td><img src="{{ asset($row->image) }}" style="width: 75px; height: 50px" alt="supplier img"></td>
+                                        <td><img src="{{ asset($row->image) }}" style="width: 75px; height: 50px" alt="img"></td>
                                         <td>{{ $row->name }}</td>
-                                        <td>{{ $row->email }}</td>
-                                        <td>{{ $row->phone }}</td>
-                                        <td>{{ $row->address }}</td>
+                                        <td>{{ $row->category->name }}</td>
+                                        <td>{{ $row->supplier->name }}</td>
+                                        <td>{{ $row->brand }}</td>
                                         <td>
                                             <a class="btn btn-primary" href="{{ route('supplier.edit',$row->id) }}">Edit</a> |
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$row->id}}">Delete</button>

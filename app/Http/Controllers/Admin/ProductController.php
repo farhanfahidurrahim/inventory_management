@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -30,7 +31,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories=Category::all();
-        $suppliers=Supplier::all();
+        $suppliers=Supplier::with('category','supplier')->get();
         return view('backend.product.create',compact('categories','suppliers'));
     }
 
@@ -42,7 +43,27 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        $request->validate([
+            'name'=>'required',
+            'image'=>'required|image|mimes:jpeg,png,jpg|max:2048',
+            'category_id'=>'required',
+            'supplier_id'=>'required',
+        ]);
+        if ($request->hasFile('image')) {
+            $imgName=date('YmdHs').'.'.$request->file('image')->extension();
+            Image::make($request->file('image'))->resize(600,400)->save(public_path('/uploads/products/').$imgName);
+            $path="uploads/products/$imgName";
+        }
+
+        $data=$request->all();
+        $data['image']=$path;
+        $store=Product::create($data);
+        if ($store) {
+            return redirect()->route('product.index')->with('success',"Created!");
+        }
+        else{
+            return redirect()->back()->with('error',"Try Again!");
+        }
     }
 
     /**
