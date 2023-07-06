@@ -9,8 +9,9 @@
                     <h4>Product Edit</h4>
                 </div>
 
-                <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('product.update',$data->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <input type="hidden" name="status" value="1">
                     <div class="card-body">
                         <div class="form-group">
@@ -72,7 +73,7 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </div>
                 </form>

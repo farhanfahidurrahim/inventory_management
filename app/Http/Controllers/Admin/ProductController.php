@@ -44,10 +44,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
+            'name'=>'required|string',
             'image'=>'required|image|mimes:jpeg,png,jpg|max:2048',
             'category_id'=>'required',
             'supplier_id'=>'required',
+            'brand'=>'string',
         ]);
         if ($request->hasFile('image')) {
             $imgName=date('YmdHs').'.'.$request->file('image')->extension();
@@ -100,7 +101,40 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data=Product::findOrFail($id);
+        $request->validate([
+            'name'=>'required|string',
+            'category_id'=>'required',
+            'supplier_id'=>'required',
+            'brand'=>'string',
+        ]);
+
+        $defaultPath = $data->image; // Default image path
+
+        if ($request->hasFile('image')) {
+            $path=public_path($data->image);
+            if (file_exists($path)) {
+                unlink($path);
+            }
+            $imgName=date('YmdHis').'.'.$request->file('image')->extension();
+            Image::make($request->file('image'))->resize(600,400)->save(public_path('/uploads/products/').$imgName);
+            $defaultPath="uploads/products/$imgName";
+        }
+
+        $update=$data->update([
+            'name'=>$request->name,
+            'image'=>$defaultPath,
+            'category_id' =>$request->category_id,
+            'supplier_id'=>$request->supplier_id,
+            'brand'=>$request->brand,
+        ]);
+
+        if ($update) {
+            return redirect()->route('product.index')->with('success',"Updated!");
+        }
+        else{
+            return redirect()->back()->with('warning',"Try Again!");
+        }
     }
 
     /**
