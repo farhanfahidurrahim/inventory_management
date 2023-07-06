@@ -37,6 +37,10 @@
             <li class="{{ request()->routeIs('product.index') ? 'active':'' }}"><a class="nav-link" href="{{ route('product.index') }}"><i class="fas fa-pencil-ruler"></i>
                 <span>Product</span></a>
             </li>
+            <li class="{{ request()->routeIs('unit.index') ? 'active':'' }}"><a class="nav-link" href="{{ route('unit.index') }}"><i class="fas fa-pencil-ruler"></i>
+                <span>Unit</span></a>
+            </li>
+
             <li class="menu-header">Stisla</li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i>
