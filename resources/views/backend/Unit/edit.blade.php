@@ -1,21 +1,22 @@
 @extends('backend.layouts.master')
-@section('title','Create | Product')
+@section('title','Edit | Product')
 @section('content')
 
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>New Product Input</h4>
+                    <h4>Product Edit</h4>
                 </div>
 
-                <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('product.update',$data->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <input type="hidden" name="status" value="1">
                     <div class="card-body">
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter Name" class="form-control">
+                            <input type="text" name="name" value="{{ $data->name }}" placeholder="Enter Name" class="form-control">
                             @error('name')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -23,7 +24,7 @@
 
                         <div class="form-group">
                             <label>Image</label>
-                            <input type="file" class="dropify" name="image" class="form-control" accept="image/*">
+                            <input type="file" class="dropify" name="image" data-default-file="{{ asset($data->image) }}" class="form-control" accept="image/*">
                             @error('image')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -34,7 +35,10 @@
                             <select name="category_id" class="form-control">
                                 <option selected disabled value="">Select Category</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    @if ($category->id==$data->category_id)
+                                    <option selected value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endif
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('category_id')
@@ -47,7 +51,10 @@
                             <select name="supplier_id" id="" class="form-control">
                                 <option selected disabled value="">Select Supplier</option>
                                 @foreach ($suppliers as $supplier)
-                                    <option value="{{ $supplier->id }}" {{ old('supplier_id') == $supplier->id ? 'selected' : '' }}>{{ $supplier->name }}</option>
+                                    @if ($supplier->id==$data->supplier_id)
+                                    <option selected value="{{ $supplier->id }}">{{ $category->name }}</option>
+                                    @endif
+                                    <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
                                 @endforeach
                             </select>
                             @error('supplier_id')
@@ -58,7 +65,7 @@
                         <div class="form-group">
                             <label>Brand</label> <span style="color: red">*optional</span>
                             <div class="input-group">
-                                <input type="text" name="brand" value="{{ old('brand') }}" placeholder="Enter Brand" class="form-control">
+                                <input type="text" name="brand" value="{{ $data->brand }}" placeholder="Enter Brand" class="form-control">
                             </div>
                             @error('brand')
                                 <p class="text-danger">{{ $message }}</p>
@@ -66,7 +73,8 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-danger">Update</button>
+                            <a href="{{ route('product.index') }}" class="btn btn-primary">Back</a>
                         </div>
                     </div>
                 </form>

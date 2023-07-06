@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class UnitController extends Controller
@@ -14,7 +15,9 @@ class UnitController extends Controller
      */
     public function index()
     {
-        //
+        $pageTitle="All Unit";
+        $data=Unit::all();
+        return view('backend.Unit.index',compact('pageTitle','data'));
     }
 
     /**
@@ -24,7 +27,7 @@ class UnitController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.Unit.create');
     }
 
     /**
@@ -35,7 +38,19 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required|string',
+            'short_form'=>'required|string',
+        ]);
+
+        $data=$request->all();
+        $store=Unit::create($data);
+        if ($store) {
+            return redirect()->route('unit.index')->with('success',"Created!");
+        }
+        else{
+            return redirect()->back()->with('error',"Try Again!");
+        }
     }
 
     /**
