@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Supplier;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
@@ -29,7 +32,10 @@ class PurchaseController extends Controller
     public function create()
     {
         $suppliers=Supplier::where('status',1)->get();
-        return view('backend.purchase.create',compact('suppliers'));
+        $categories=Category::all();
+        $products=Product::all();
+        $units=Unit::all();
+        return view('backend.purchase.create',compact('suppliers','categories','products','units'));
     }
 
     /**
