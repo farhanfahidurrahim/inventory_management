@@ -40,31 +40,11 @@
             <li class="{{ request()->routeIs('unit.index') ? 'active':'' }}"><a class="nav-link" href="{{ route('unit.index') }}"><i class="far fa-file-alt"></i>
                 <span>Unit</span></a>
             </li>
+            <li class="{{ request()->routeIs('purchase.index') ? 'active':'' }}"><a class="nav-link" href="{{ route('purchase.index') }}"><i class="fas fa-plug"></i>
+                <span>Purchase</span></a>
+            </li>
 
             <li class="menu-header">Stisla</li>
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i>
-                    <span>Forms</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="forms-advanced-form.html">Advanced Form</a></li>
-                    <li><a class="nav-link" href="forms-editor.html">Editor</a></li>
-                    <li><a class="nav-link" href="forms-validation.html">Validation</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-map-marker-alt"></i>
-                    <span>Google Maps</span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="gmaps-advanced-route.html">Advanced Route</a></li>
-                    <li><a href="gmaps-draggable-marker.html">Draggable Marker</a></li>
-                    <li><a href="gmaps-geocoding.html">Geocoding</a></li>
-                    <li><a href="gmaps-geolocation.html">Geolocation</a></li>
-                    <li><a href="gmaps-marker.html">Marker</a></li>
-                    <li><a href="gmaps-multiple-marker.html">Multiple Marker</a></li>
-                    <li><a href="gmaps-route.html">Route</a></li>
-                    <li><a href="gmaps-simple.html">Simple</a></li>
-                </ul>
-            </li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-plug"></i>
                     <span>Modules</span></a>

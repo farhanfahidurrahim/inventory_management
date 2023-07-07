@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Purchase;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
@@ -14,7 +16,9 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        //
+        $pageTitle="All Purchase List";
+        $data=Purchase::all();
+        return view('backend.purchase.index',compact('pageTitle','data'));
     }
 
     /**
@@ -24,7 +28,8 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        //
+        $suppliers=Supplier::where('status',1)->get();
+        return view('backend.purchase.create',compact('suppliers'));
     }
 
     /**

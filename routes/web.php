@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\UnitController;
 use Illuminate\Support\Facades\Auth;
@@ -43,4 +44,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function(){
     Route::resource('/product', ProductController::class);
     //Unit
     Route::resource('/unit', UnitController::class);
+    //Unit
+    Route::resource('/purchase', PurchaseController::class);
 });
