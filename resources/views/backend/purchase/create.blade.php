@@ -99,7 +99,7 @@
 
                                     <tfoot>
                                         <th colspan="5">Total</th>
-                                        <th><input class="form-control" type="text" name="total" placeholder="All Total" disabled></th>
+                                        <th><input class="form-control" type="text" name="total" id="total" placeholder="All Total" disabled></th>
                                     </tfoot>
                                 </table>
                             </div>
@@ -180,7 +180,7 @@
                 allTotal += value;
             })
 
-            console.log(allTotal);
+            $('#total').val(allTotal);
         }
 
     </script>
