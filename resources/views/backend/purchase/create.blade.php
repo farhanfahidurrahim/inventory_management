@@ -67,7 +67,7 @@
                                     <tbody class="tbody">
                                         <tr class="tr">
                                             <td>
-                                                <select name="category_id[]" id="" class="form-control">
+                                                <select name="category_id[]" id="category" class="form-control">
                                                     <option selected disabled value="">Choose Category</option>
                                                     @foreach ($categories as $category)
                                                     <option value="">{{ $category->name }}</option>
@@ -75,7 +75,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select name="product_id[]" id="" class="form-control">
+                                                <select name="product_id[]" id="product" class="form-control">
                                                     <option selected disabled value="">Choose Product</option>
                                                     @foreach ($products as $product)
                                                     <option value="{{ $product->id }}">{{ $product->name }}</option>
@@ -83,16 +83,16 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select name="unit_id[]" id="" class="form-control">
+                                                <select name="unit_id[]" id="unit" class="form-control">
                                                     <option selected disabled value="">Choose Unit</option>
                                                     @foreach ($units as $unit)
                                                     <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td><input type="text" class="form-control" name="quantity[]" placeholder="Enter Quantity"></td>
-                                            <td><input type="text" class="form-control" name="unit_price[]" placeholder="Enter Unit Price"></td>
-                                            <td><input type="text" class="form-control" placeholder="Total" disabled></td>
+                                            <td><input type="text" name="quantity[]" id="quantity_1" onkeyup="calculateTotal(event)" class="form-control" placeholder="Enter Quantity"></td>
+                                            <td><input type="text" name="unit_price[]" id="price_1" onkeyup="calculateTotal(event)" class="form-control" placeholder="Enter Unit Price"></td>
+                                            <td><input type="text" id="total_1" class="form-control total" placeholder="Total" disabled></td>
                                             <td><button type="button" onclick="removeRow(event)" class="btn btn-danger">X</button></td>
                                         </tr>
                                     </tbody>
@@ -121,10 +121,11 @@
     <script>
 
         function cloneRow(){
+            let count = 2;
             const tr= `
             <tr class="tr">
                 <td>
-                    <select name="category_id[]" id="" class="form-control">
+                    <select name="category_id[]" id="category_${count}" class="form-control">
                         <option selected disabled value="">Choose Category</option>
                         @foreach ($categories as $category)
                         <option value="">{{ $category->name }}</option>
@@ -132,7 +133,7 @@
                     </select>
                 </td>
                 <td>
-                    <select name="product_id[]" id="" class="form-control">
+                    <select name="product_id[]" id="product_${count}" class="form-control">
                         <option selected disabled value="">Choose Product</option>
                         @foreach ($products as $product)
                         <option value="{{ $product->id }}">{{ $product->name }}</option>
@@ -140,16 +141,16 @@
                     </select>
                 </td>
                 <td>
-                    <select name="unit_id[]" id="" class="form-control">
+                    <select name="unit_id[]" id="unit_${count}" class="form-control">
                         <option selected disabled value="">Choose Unit</option>
                         @foreach ($units as $unit)
                         <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                         @endforeach
                     </select>
                 </td>
-                <td><input type="text" class="form-control" name="quantity[]" placeholder="Enter Quantity"></td>
-                <td><input type="text" class="form-control" name="unit_price[]" placeholder="Enter Unit Price"></td>
-                <td><input type="text" class="form-control" name="total[]" placeholder="Enter Total"></td>
+                <td><input type="text" name="quantity[]" onkeyup="calculateTotal(event)" id="quantity_${count}" class="form-control" placeholder="Enter Quantity"></td>
+                <td><input type="text" name="unit_price[]" onkeyup="calculateTotal(event)" id="price_${count}" class="form-control" placeholder="Enter Unit Price"></td>
+                <td><input type="text" id="total_${count}" class="form-control total" placeholder="Total" disabled></td>
                 <td><button type="button" onclick="removeRow(event)" class="btn btn-danger">X</button></td>
             </tr>
             `;
@@ -161,6 +162,25 @@
             if ($('.tr').length > 1) {
                 $(event.target).closest('.tr').remove();
             }
+        }
+
+        function calculateTotal(event){
+
+            let allTotal = 0;
+
+            const id= $(event.target).attr('id');
+            const num= id.split('_');
+            const quantity= parseFloat($('#quantity_'+num[1]).val());
+            const price= $('#price_'+num[1]).val();
+            const total= quantity*price;
+            $('#total_'+num[1]).val(total);
+
+            $('.total').each(function(){
+                const value= parseFloat($(this).val());
+                allTotal += value;
+            })
+
+            console.log(allTotal);
         }
 
     </script>
