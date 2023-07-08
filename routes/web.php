@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\UnitController;
+use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -46,4 +47,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function(){
     Route::resource('/unit', UnitController::class);
     //Unit
     Route::resource('/purchase', PurchaseController::class);
+
+    Route::get('/category/product/{id}', [PurchaseController::class, 'getProduct'])->name('get.product');
 });

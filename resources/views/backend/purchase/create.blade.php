@@ -67,19 +67,16 @@
                                     <tbody class="tbody">
                                         <tr class="tr">
                                             <td>
-                                                <select name="category_id[]" id="category" class="form-control">
+                                                <select name="category_id[]" id="category_1" class="form-control category">
                                                     <option selected disabled value="">Choose Category</option>
                                                     @foreach ($categories as $category)
-                                                    <option value="">{{ $category->name }}</option>
+                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
                                             <td>
-                                                <select name="product_id[]" id="product" class="form-control">
-                                                    <option selected disabled value="">Choose Product</option>
-                                                    @foreach ($products as $product)
-                                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                                    @endforeach
+                                                <select name="product_id[]" id="product_1" class="form-control">
+                                                    <option selected>Choose Product</option>
                                                 </select>
                                             </td>
                                             <td>
@@ -92,14 +89,14 @@
                                             </td>
                                             <td><input type="text" name="quantity[]" id="quantity_1" onkeyup="calculateTotal(event)" class="form-control" placeholder="Enter Quantity"></td>
                                             <td><input type="text" name="unit_price[]" id="price_1" onkeyup="calculateTotal(event)" class="form-control" placeholder="Enter Unit Price"></td>
-                                            <td><input type="text" id="total_1" class="form-control total" placeholder="Total" disabled></td>
+                                            <td><input type="text" id="total_1" class="form-control total" placeholder="Total" readonly></td>
                                             <td><button type="button" onclick="removeRow(event)" class="btn btn-danger">X</button></td>
                                         </tr>
                                     </tbody>
 
                                     <tfoot>
                                         <th colspan="5">Total</th>
-                                        <th><input class="form-control" type="text" name="total" id="total" placeholder="All Total" disabled></th>
+                                        <th><input class="form-control" type="text" name="total" id="total" placeholder="All Total" readonly></th>
                                     </tfoot>
                                 </table>
                             </div>
@@ -120,24 +117,27 @@
 
     <script>
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         function cloneRow(){
             let count = 2;
             const tr= `
             <tr class="tr">
                 <td>
-                    <select name="category_id[]" id="category_${count}" class="form-control">
+                    <select name="category_id[]" id="category_${count}" class="form-control category">
                         <option selected disabled value="">Choose Category</option>
                         @foreach ($categories as $category)
-                        <option value="">{{ $category->name }}</option>
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
                 </td>
                 <td>
                     <select name="product_id[]" id="product_${count}" class="form-control">
-                        <option selected disabled value="">Choose Product</option>
-                        @foreach ($products as $product)
-                        <option value="{{ $product->id }}">{{ $product->name }}</option>
-                        @endforeach
+                        <option selected>Choose Product</option>
                     </select>
                 </td>
                 <td>
@@ -150,7 +150,7 @@
                 </td>
                 <td><input type="text" name="quantity[]" onkeyup="calculateTotal(event)" id="quantity_${count}" class="form-control" placeholder="Enter Quantity"></td>
                 <td><input type="text" name="unit_price[]" onkeyup="calculateTotal(event)" id="price_${count}" class="form-control" placeholder="Enter Unit Price"></td>
-                <td><input type="text" id="total_${count}" class="form-control total" placeholder="Total" disabled></td>
+                <td><input type="text" id="total_${count}" class="form-control total" placeholder="Total" readonly></td>
                 <td><button type="button" onclick="removeRow(event)" class="btn btn-danger">X</button></td>
             </tr>
             `;
@@ -182,6 +182,26 @@
 
             $('#total').val(allTotal);
         }
+
+        $('.category').change(function(){
+            const id= $(this).val();
+            const dataId=$(this).attr('id');
+            const num=dataId.split('_');
+
+            $.ajax({
+                type:"get",
+                url:"{{ route('get.product', '') }}" + "/" + id,
+                dataType: "json",
+                success:function(data){
+                    let html = '<option selected>Choose Product</option>';
+                    data.forEach(product=>{
+                        html += `<option value="${product.id}">${product.name}</option>`;
+                    });
+                    $('#product_'+num[1]).html(html);
+                }
+            });
+
+        })
 
     </script>
 

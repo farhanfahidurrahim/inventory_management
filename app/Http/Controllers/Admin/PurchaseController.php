@@ -93,4 +93,11 @@ class PurchaseController extends Controller
     {
         //
     }
+
+    public function getProduct($id)
+    {
+        $products=Product::where('category_id',$id)->get();
+        // return $products;
+        return response()->json($products);
+    }
 }
