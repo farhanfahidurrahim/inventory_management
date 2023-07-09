@@ -14,23 +14,22 @@
                         <table id="myTable" class="table table-striped">
                             <thead>
                                 <th>Sl No.</th>
-                                <th>Thumbnail</th>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Supllier</th>
-                                <th>Brand</th>
+                                <th>Purchase No.</th>
+                                <th>Total Amount</th>
+                                <th>Paid Amount</th>
+                                <th>Due Amount</th>
                                 <th>Action</th>
                             </thead>
                             <tbody>
                                 @foreach ($data as $row)
                                     <tr>
                                         <td>{{ $loop->iteration++ }}</td>
-                                        <td><img src="{{ asset($row->image) }}" style="width: 80px; height: 60px" alt="img"></td>
-                                        <td>{{ $row->name }}</td>
-                                        <td>{{ $row->category->name }}</td>
-                                        <td>{{ $row->supplier->name }}</td>
-                                        <td>{{ $row->brand }}</td>
+                                        <td>{{ $row->purchase_no }}</td>
+                                        <td>{{ $row->total_amount }}</td>
+                                        <td>{{ $row->paid_amount }}</td>
+                                        <td>{{ $row->due_amount }}</td>
                                         <td>
+                                            <a class="btn btn-success" href="{{ route('purchase.show',$row->id) }}">View</a> |
                                             <a class="btn btn-primary" href="{{ route('product.edit',$row->id) }}">Edit</a> |
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$row->id}}">Delete</button>
                                         </td>

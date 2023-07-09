@@ -15,4 +15,14 @@ class Purchase extends Model
         'paid_amount',
         'due_amount',
     ];
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
+
+    public function purchasemeta()
+    {
+        return $this->hasMany(PurchaseMeta::class);
+    }
 }
