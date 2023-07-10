@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SupplierController;
@@ -45,8 +46,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'],function(){
     Route::resource('/product', ProductController::class);
     //Unit
     Route::resource('/unit', UnitController::class);
-    //Unit
+    //Purchase
     Route::resource('/purchase', PurchaseController::class);
-
     Route::get('/category/product/{id}', [PurchaseController::class, 'getProduct'])->name('get.product');
+    //Invoice
+    Route::resource('/invoice', InvoiceController::class);
 });
