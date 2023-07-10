@@ -30,7 +30,7 @@
                                         <td>{{ $row->due_amount }}</td>
                                         <td>
                                             <a class="btn btn-success" href="{{ route('purchase.show',$row->id) }}">View</a> |
-                                            <a class="btn btn-primary" href="{{ route('product.edit',$row->id) }}">Edit</a> |
+                                            <a class="btn btn-primary" href="{{ route('purchase.edit',$row->id) }}">Edit</a> |
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$row->id}}">Delete</button>
                                         </td>
                                     </tr>
@@ -50,7 +50,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-                                                    <form action="{{ route('product.destroy',$row->id) }}" method="POST">
+                                                    <form action="{{ route('purchase.destroy',$row->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Yes</button>

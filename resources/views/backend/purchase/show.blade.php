@@ -65,6 +65,7 @@
                                             </td>
                                             <td><input type="text" value="{{ $item->quantity }}" class="form-control" disabled></td>
                                             <td><input type="text" value="{{ $item->unit_price }}" class="form-control" disabled></td>
+                                            <td><input type="text" value="{{ $item->quantity*$item->unit_price }}" class="form-control" disabled></td>
                                         </tr>
                                         @endforeach
                                     </tbody>
