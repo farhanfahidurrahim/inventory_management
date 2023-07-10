@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Invoice;
+use App\Models\InvoiceMeta;
+use App\Models\Supplier;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -14,7 +19,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.invoice.index');
     }
 
     /**
@@ -24,7 +29,10 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        //
+        $customers=Supplier::where('status',2)->get();
+        $categories=Category::all();
+        $units=Unit::all();
+        return view('backend.invoice.create',compact('customers','categories','units'));
     }
 
     /**
@@ -35,7 +43,40 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return $request->all();
+        $request->validate([
+            'invoice_no' => 'required',
+            'paid_amount' => 'required|numeric',
+            'supplier_id' => 'required',
+            'category_id' => 'required',
+            'product_id' => 'required',
+            'unit_id' => 'required',
+            'quantity' => 'required',
+            'unit_price' => 'required',
+            'quantity' => 'required',
+            'total_amount' => 'required',
+        ]);
+
+        $invoice=Invoice::create([
+            'invoice_no' => $request->invoice_no,
+            'supplier_id' => $request->supplier_id,
+            'paid_amount' => $request->paid_amount,
+            'total_amount' => $request->total_amount,
+            'due_amount' => (int)$request->total_amount-(int)$request->paid_amount,
+        ]);
+
+        for ($i=0; $i < count($request->category_id); $i++) {
+            InvoiceMeta::create([
+                'invoice_id'=>$invoice->id,
+                'category_id'=>$request->category_id[$i],
+                'product_id'=>$request->product_id[$i],
+                'quantity'=>$request->quantity[$i],
+                'unit_price'=>$request->unit_price[$i],
+                'unit_id'=>$request->unit_id[$i],
+            ]);
+        }
+
+        return redirect()->route('invoice.index');
     }
 
     /**

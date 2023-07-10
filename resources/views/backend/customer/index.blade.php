@@ -21,7 +21,7 @@
                                 <th>Action</th>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($data as $row)
+                                @foreach ($data as $row)
                                     <tr>
                                         <td>{{ $loop->iteration++ }}</td>
                                         <td><img src="{{ asset($row->image) }}" style="width: 75px; height: 50px" alt="supplier img"></td>
@@ -59,7 +59,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

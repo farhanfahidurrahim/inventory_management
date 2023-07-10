@@ -43,26 +43,10 @@
             <li class="{{ request()->routeIs('purchase.index') ? 'active':'' }}"><a class="nav-link" href="{{ route('purchase.index') }}"><i class="fas fa-plug"></i>
                 <span>Purchase</span></a>
             </li>
-
-            <li class="menu-header">Stisla</li>
-            <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-plug"></i>
-                    <span>Modules</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="modules-calendar.html">Calendar</a></li>
-                    <li><a class="nav-link" href="modules-chartjs.html">ChartJS</a></li>
-                    <li><a class="nav-link" href="modules-datatables.html">DataTables</a></li>
-                    <li><a class="nav-link" href="modules-flag.html">Flag</a></li>
-                    <li><a class="nav-link" href="modules-font-awesome.html">Font Awesome</a></li>
-                    <li><a class="nav-link" href="modules-ion-icons.html">Ion Icons</a></li>
-                    <li><a class="nav-link" href="modules-owl-carousel.html">Owl Carousel</a></li>
-                    <li><a class="nav-link" href="modules-sparkline.html">Sparkline</a></li>
-                    <li><a class="nav-link" href="modules-sweet-alert.html">Sweet Alert</a></li>
-                    <li><a class="nav-link" href="modules-toastr.html">Toastr</a></li>
-                    <li><a class="nav-link" href="modules-vector-map.html">Vector Map</a></li>
-                    <li><a class="nav-link" href="modules-weather-icon.html">Weather Icon</a></li>
-                </ul>
+            <li class="{{ request()->routeIs('invoice.index') ? 'active':'' }}"><a class="nav-link" href="{{ route('invoice.index') }}"><i class="fas fa-ellipsis-h"></i>
+                <span>Invocie</span></a>
             </li>
+
             <li class="menu-header">Pages</li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i>
