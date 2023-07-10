@@ -19,7 +19,9 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        return view('backend.invoice.index');
+        $pageTitle="All Invoice List";
+        $data=Invoice::all();
+        return view('backend.invoice.index',compact('pageTitle','data'));
     }
 
     /**
@@ -43,7 +45,7 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request->all();
+
         $request->validate([
             'invoice_no' => 'required',
             'paid_amount' => 'required|numeric',
@@ -59,7 +61,7 @@ class InvoiceController extends Controller
 
         $invoice=Invoice::create([
             'invoice_no' => $request->invoice_no,
-            'supplier_id' => $request->supplier_id,
+            'customer_id' => $request->supplier_id,
             'paid_amount' => $request->paid_amount,
             'total_amount' => $request->total_amount,
             'due_amount' => (int)$request->total_amount-(int)$request->paid_amount,

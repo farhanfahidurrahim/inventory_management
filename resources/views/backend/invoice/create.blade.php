@@ -16,8 +16,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Purchase No.</label>
-                                    <input type="text" name="purchase_no" value="INV-{{ old('purchase_no') }}" placeholder="Enter Purchase No" class="form-control">
-                                    @error('purchase_no')
+                                    <input type="text" name="invoice_no" value="INV-{{ old('invoice_no') }}" placeholder="Enter Invoice No" class="form-control">
+                                    @error('invoice_no')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -101,7 +101,7 @@
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Submit</button>
-                            <a href="{{ route('purchase.index') }}" class="btn btn-info">Back</a>
+                            <a href="{{ route('invoice.index') }}" class="btn btn-info">Back</a>
                         </div>
                     </div>
                 </form>
